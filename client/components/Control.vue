@@ -5,13 +5,20 @@
 <script type="es6">
     import Vue from 'vue'
     import { mapState, mapActions, mapGetters } from 'vuex'
-
+    import {buildKey,getFoodsRange,hasIntersect,dieWall} from 'utils/buildData'
     export default {
         name: 'Control',
         mounted(){
             var that = this;
-            onkeydown(that)
+            var my=that.$store.state.snaker.my;
+            var foods=that.$store.state.food.foods;
+            onkeydown(that);
+          setInterval(function(){
             automove(that);
+            isdie(that,my);
+            eat(my,foods);
+          },100)
+
         }
     }
 
@@ -34,15 +41,38 @@
         }
     }
     function automove(that){
-        setInterval(function(){
             that.$store.commit('SNAKER_MOVE');
-        },200)
     }
 
-    function iseat(snaker,food,width){
-        return Math.sqrt(Math.pow(snaker.x-food.x,2)+Math.pow(snaker.y-food.y,2))<=width+food.size
+    function eat(my,foods){
+      var foodRange=getFoodsRange(buildKey(my.header,my.width),foods);
+      for(var key in foodRange){
+        var item=foodRange[key];
+        for(var i in item){
+          var food=item[i]
+          if(hasIntersect(my.header,food , my.width)){
+             Vue.delete(foods[key],i);
+             my.score+=food.size;
+             grow(my);
+          }
+        }
+      }
     }
+
+    function grow(my){
+        if(my.score>=2){
+          var len=my.body.length;
+          my.score-=2;
+          my.body.push(my.body[len-1]);
+        }
+    }
+
+  function isdie(that,my){
+     if(dieWall(my.header.x,my.header.y)){
+       console.log('撞墙了')
+       that.$store.commit('SNAKER_INIT');
+     }
+  }
 </script>
 
-<style lang="less" scoped>
-</style>
+

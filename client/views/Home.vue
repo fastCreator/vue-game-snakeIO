@@ -1,5 +1,5 @@
 <template>
-    <div class="page">
+    <div class="page"  :style="{left:clientWidth2-my.header.x+'px',top:clientHeight2-my.header.y+'px'}">
         <Snaker v-bind="my" class="mySnaker"></Snaker>
         <Food></Food>
         <Control></Control>
@@ -19,6 +19,12 @@
             Food,
             Control
         },
+        data(){
+          return {
+            clientWidth2:document.body.clientWidth/2,
+            clientHeight2:document.body.clientHeight/2,
+          }
+        },
         computed: {
             ...mapState({
                 my: state=> {
@@ -33,3 +39,12 @@
         }
     }
 </script>
+<style scoped>
+.page{
+  width: 3000px;
+  height: 3000px;
+  overflow: hidden;
+  position: absolute;
+  background-color: #EBEBF3;
+}
+</style>

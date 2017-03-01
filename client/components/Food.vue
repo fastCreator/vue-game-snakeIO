@@ -12,7 +12,6 @@
     import Vue from 'vue'
     import { mapState, mapActions, mapGetters } from 'vuex'
 
-
     export default {
         name: 'Food',
         computed: {
@@ -34,6 +33,11 @@
 </script>
 
 <style lang="less" scoped>
+    .foods{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
     .food {
         border-radius: 100%;
         position: absolute;
