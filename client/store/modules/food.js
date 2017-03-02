@@ -11,7 +11,7 @@ const state =
 
 const mutations = {
   [types.FOOD_CREATE] (state) {
-    if (state.length < 10) {
+    if (state.length < 500) {
       var food = buildFood();
       var key = buildKey(food, food.size);
       var arr = state.foods[key];

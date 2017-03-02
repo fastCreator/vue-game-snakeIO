@@ -13,12 +13,12 @@
             var my=that.$store.state.snaker.my;
             var foods=that.$store.state.food.foods;
             onkeydown(that);
+            //onkeyup(that);
           setInterval(function(){
             automove(that);
             isdie(that,my);
             eat(my,foods);
           },100)
-
         }
     }
 
@@ -37,8 +37,20 @@
                 case 37:
                     that.$store.commit('SNAKER_TURN', 4);
                     break;
+                //case 32:
+                //    that.$store.commit('SNAKER_SPEED');
+                //    break;
             }
         }
+    }
+    function onkeyup(that) {
+      window.onkeyup = function (e) {
+        switch (e.keyCode) {
+          case 37:
+            that.$store.commit('SNAKER_speed');
+            break;
+        }
+      }
     }
     function automove(that){
             that.$store.commit('SNAKER_MOVE');
@@ -50,7 +62,7 @@
         var item=foodRange[key];
         for(var i in item){
           var food=item[i]
-          if(hasIntersect(my.header,food , my.width)){
+          if(hasIntersect(my.body[0],food , my.width)){
              Vue.delete(foods[key],i);
              my.score+=food.size;
              grow(my);
@@ -60,9 +72,10 @@
     }
 
     function grow(my){
-        if(my.score>=2){
+      //加长
+        if(my.score>=my.width/2){
           var len=my.body.length;
-          my.score-=2;
+          my.score-=my.width/2;
           my.body.push(my.body[len-1]);
         }
     }

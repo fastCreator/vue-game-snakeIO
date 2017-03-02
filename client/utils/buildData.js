@@ -23,7 +23,7 @@ export const buildFood = function () {
   return {
     x: buildX(),
     y: buildY(),
-    size: parseInt(Math.random() * 10 + 5),
+    size: parseInt(Math.random() * 20 + 10),
     color: buildColor()
   }
 }
@@ -47,5 +47,5 @@ export const getFoodsRange = function (key, foods) {
 }
 
 export const dieWall = function (x, y) {
-  return !(x > 0 && y > 0 && x < width && y < height)
+  return !(x > 0 && y > 0 && x < width-10 && y < height-20)
 }

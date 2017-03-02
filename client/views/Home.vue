@@ -42,9 +42,11 @@
 <style scoped>
 .page{
   width: 3000px;
-  height: 3000px;
+  height: 1968px;
   overflow: hidden;
   position: absolute;
-  background-color: #EBEBF3;
+  background-image: url("../static/img/bk.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat; 
 }
 </style>

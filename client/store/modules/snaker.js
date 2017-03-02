@@ -35,7 +35,7 @@ const state =
     ]
   }
 }
-const distance = 1;
+var distance =10;
 const mutations = {
   [types.SNAKER_MOVE] (state) {
     var header = state.my.header, body = state.my.body;
@@ -58,6 +58,12 @@ const mutations = {
         console.error('方向传递错误', distance);
     }
   },
+  //[types.SNAKER_SPEED] (state) {
+  //  distance=10;
+  //},
+  //[types.SNAKER_UP] (state) {
+  //  distance=1;
+  //},
   [types.SNAKER_TURN] (state, direction) {
     state.my.direction = direction
   },
