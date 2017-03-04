@@ -4,6 +4,7 @@
   "description": "My Superb Vue Project",
   "main": "client/index.js",
   "scripts": {
+    "start": "node build/app.js",
     "test": "testcafe all tests/index.js --app \"npm run dev\" --app-init-delay 10000",
     "build": "webpack --config build/webpack.prod.js",
     "dev": "node build/server.js",
@@ -13,8 +14,10 @@
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "^6.18.0",
+    "express": "^4.15.0",
     "leancloud-realtime": "^3.3.4",
     "promise-polyfill": "^6.0.2",
+    "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3",
     "strip-ansi": "^3.0.1",
     "vue": "^2.1.0",
