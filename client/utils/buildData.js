@@ -4,8 +4,8 @@ var width = config.window.width, height = config.window.height;
 const color = ['#FCEDD6', '#A921C6', '#1F9B7C', '#E3DC2D', '#19A580'];
 
 
-export const hasIntersect = function (snaker, food, snakerWidth) {
-  return Math.sqrt(Math.pow(snaker.x - food.x, 2) + Math.pow(snaker.y - food.y, 2)) <= snakerWidth + food.size;
+export const hasIntersect = function (snaker, food, snakerWidth,size) {
+  return Math.sqrt(Math.pow(snaker.x - food.x, 2) + Math.pow(snaker.y - food.y, 2)) <= snakerWidth + size||food.size;
 }
 export const buildKey = function (food, size) {
   return Math.floor((food.x + size / 2) / 30) + 't' + Math.floor((food.y + size / 2) / 30);
@@ -48,4 +48,15 @@ export const getFoodsRange = function (key, foods) {
 
 export const dieWall = function (x, y) {
   return !(x > 0 && y > 0 && x < width-10 && y < height-20)
+}
+export const dieEnemy = function (my,enemy) {
+    for(var key in enemy){
+        var arr=enemy[key];
+      for(var item of arr.body){
+        if(hasIntersect(my.header, item, my.width,20)){
+              return true;
+        }
+      }
+    }
+  return false
 }

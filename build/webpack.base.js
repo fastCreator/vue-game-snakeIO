@@ -23,8 +23,10 @@ module.exports = {
     alias: {
       root: path.join(__dirname, '../client'),
       components: path.join(__dirname, '../client/components'),
-      utils:path.join(__dirname, '../client/utils')
-    },
+      utils:path.join(__dirname, '../client/utils'),
+      img:path.join(__dirname, '../static/img'),
+      socket: path.resolve(__dirname, '../node_modules/socket.io-client/dist/socket.io')
+},
     modules: [
       _.cwd('node_modules'),
       // this meanse you can get rid of dot hell
@@ -78,7 +80,10 @@ module.exports = {
         // to the roor of dist path
         to: './'
       }
-    ])
+    ]),
+    new webpack.ProvidePlugin({
+      io: 'socket'
+    }),
   ],
   target: _.target
 }

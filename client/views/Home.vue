@@ -1,5 +1,9 @@
 <template>
-    <div class="page"  :style="{left:clientWidth2-my.header.x+'px',top:clientHeight2-my.header.y+'px'}">
+   <!-- <div class="page"  :style="{left:clientWidth2-my.header.x+'px',top:clientHeight2-my.header.y+'px'}">-->
+    <div class="page"  >
+        <template v-for="(val, key) in enemy">
+          <Snaker v-bind="val" class="snaker enemy" ></Snaker>
+        </template>
         <Snaker v-bind="my" class="mySnaker"></Snaker>
         <Food></Food>
         <Control></Control>
@@ -32,14 +36,17 @@
                         header:state.snaker.my.header,
                         body:state.snaker.my.body,
                         direction:state.snaker.my.direction,
-                        color:'#FF5858'
+                        color:state.snaker.my.color
                     }
-                }
+                },
+              enemy:state=> {
+                return  state.snaker.enemy
+              }
             })
         }
     }
 </script>
-<style scoped>
+<style  scoped>
 .page{
   width: 3000px;
   height: 1968px;
@@ -47,6 +54,12 @@
   position: absolute;
   background-image: url("../static/img/bk.jpg");
   background-size: 100% 100%;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
 }
+
+</style>
+<style>
+  .mySnaker,.mySnaker div{
+    z-index: 90;
+  }
 </style>

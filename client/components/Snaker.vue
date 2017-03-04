@@ -6,7 +6,7 @@
             <div class="snaker-eyes fr"></div>
         </div>
         <template v-for="(item, index) in body">
-            <div class="snaker-body" v-absolute="item" :style="{backgroundColor : color }"></div>
+            <div class="snaker-body" v-absolute="item" :style="{backgroundColor : color }" :key="item.id"></div>
         </template>
     </div>
 </template>
